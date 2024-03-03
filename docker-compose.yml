@@ -1,0 +1,30 @@
+version: "3.0"
+services:
+  mongo:
+    container_name: tasks-mongo-container
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+  app:
+    container_name: tasks-app-container
+    image: node:lts-alpine
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./src:/home/node/src
+    working_dir: /home/node/src/tasks-app
+    depends_on:
+      - mongo
+    environment:
+      - HOST=0.0.0.0 # makes server accessible from network
+    tty: true # allowing shell interaction from host
+    command: "npm run dev"
+
+volumes:
+  mongodb_data:
