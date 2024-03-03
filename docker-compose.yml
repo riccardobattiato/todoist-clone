@@ -5,8 +5,6 @@ services:
     image: mongo:latest
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
       DB_NAME: tasks
     ports:
       - 27017:27017
