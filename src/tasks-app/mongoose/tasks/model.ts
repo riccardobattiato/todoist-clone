@@ -1,4 +1,5 @@
 import mongoose, { model } from "mongoose";
-import { TaskSchema, TaskType } from "./schema";
+import type { ITask } from "@/types/tasks";
+import { TaskSchema } from "./schema";
 
-export default mongoose.models.tasks || model<TaskType>("tasks", TaskSchema);
+export default mongoose.models.tasks || model<ITask>("tasks", TaskSchema);

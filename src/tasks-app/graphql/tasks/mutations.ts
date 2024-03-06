@@ -1,11 +1,14 @@
 import { createTask, updateTask, deleteTask } from "@/mongoose/tasks/services";
-import { CreateTaskInterface } from "@/mongoose/tasks/custom";
+import { ITaskCreate, ITaskUpdate, ITaskDelete } from "@/mongoose/tasks/types";
 
 export const tasksMutations = {
-  createTask: async (_: any, param: CreateTaskInterface) => {
-    return await createTask(param);
+  createTask: async (_: any, { input }: { input: ITaskCreate }) => {
+    return await createTask(input);
   },
-  deleteTask: async (_: any, param: string) => {
-    return await deleteTask(param);
+  updateTask: async (_: any, { input }: { input: ITaskUpdate }) => {
+    return await updateTask(input);
+  },
+  deleteTask: async (_: any, { input }: { input: ITaskDelete }) => {
+    return await deleteTask(input);
   },
 };

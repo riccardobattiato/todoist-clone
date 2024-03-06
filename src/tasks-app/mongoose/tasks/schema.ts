@@ -1,14 +1,13 @@
-import { Schema, type InferSchemaType } from "mongoose";
+import { Schema } from "mongoose";
+import { ITask } from "@/types/tasks";
 
-export const TaskSchema: Schema = new Schema<TaskType>({
+export const TaskSchema = new Schema<ITask>({
   name: {
     type: "String",
     required: true,
   },
   description: "String",
-  due_date: "Date",
   priority: "Number",
-  done: "Boolean",
+  dueDate: "Date",
+  completed: "Boolean",
 });
-
-export declare type TaskType = InferSchemaType<typeof TaskSchema>;

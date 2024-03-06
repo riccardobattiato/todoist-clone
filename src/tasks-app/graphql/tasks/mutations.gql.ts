@@ -1,4 +1,5 @@
 export default `
-    createTask(name: String!, description: String, due_date: Date): Task!
-    deleteTask(id: ID!): Task
+    createTask(input: TaskCreate): Task!
+    updateTask(input: TaskUpdate): Task
+    deleteTask(input: TaskDelete): Boolean
 `;
