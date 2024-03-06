@@ -12,18 +12,19 @@ export const resolvers = {
   },
   Date: new GraphQLScalarType({
     name: "Date",
-    description: "Date custom scalar type",
+    description: "A ISO 8601 compliant datetime value",
     parseValue(value) {
       return new Date(value as string); // value from the client
     },
+    parseLiteral(ast) {
+      if (ast.kind !== Kind.STRING) {
+        return null;
+      }
+      const { value } = ast;
+      return new Date(value);
+    },
     serialize(value) {
       return (value as Date).toISOString(); // value sent to the client
-    },
-    parseLiteral(ast) {
-      if (ast.kind === Kind.STRING) {
-        return new Date(ast.value); // ast value is always in string format
-      }
-      return null;
     },
   }),
 };
