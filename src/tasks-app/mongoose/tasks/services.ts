@@ -12,7 +12,7 @@ export async function createTask(data: ITaskCreate): Promise<ITask | void> {
 }
 
 export async function findTasks(
-  filter?: ITaskFilterText
+  filter?: ITaskFilterText,
 ): Promise<ITask[] | []> {
   return await Tasks.find(filter || {});
 }
