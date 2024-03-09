@@ -37,7 +37,14 @@ const TaskEntry = ({
         <div className="task-entry__checkmark">
           <TaskCheckmark onChange={handleChange} active={completed} />
         </div>
-        <div className="task-entry__name text-sm font-light">{name}</div>
+        <div
+          className={clsx([
+            "task-entry__name text-sm font-light",
+            { "text-neutral-400 line-through": completed },
+          ])}
+        >
+          {name}
+        </div>
         <div className="task-entry__content col-start-2 col-end-3">
           {description && (
             <div className="task-entry__description mt-1">
