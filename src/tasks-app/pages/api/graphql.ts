@@ -5,6 +5,7 @@ import { typeDefs } from "@/graphql/schema";
 import dbConnect from "@/middleware/db-connect";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
+// TODO move to app directory
 const server = new ApolloServer<BaseContext>({ resolvers, typeDefs });
 
 const handler = startServerAndCreateNextHandler(server, {
