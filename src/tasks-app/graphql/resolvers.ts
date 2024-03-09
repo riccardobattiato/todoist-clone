@@ -1,5 +1,6 @@
 import { tasksQueries } from "./tasks/queries";
 import { tasksMutations } from "./tasks/mutations";
+import { tasksFields } from "./tasks/fields";
 import { tagsQueries } from "./tags/queries";
 import { tagsMutations } from "./tags/mutations";
 import { GraphQLScalarType } from "graphql";
@@ -13,6 +14,9 @@ export const resolvers = {
   Mutation: {
     ...tasksMutations,
     ...tagsMutations,
+  },
+  Task: {
+    ...tasksFields,
   },
   Date: new GraphQLScalarType({
     name: "Date",

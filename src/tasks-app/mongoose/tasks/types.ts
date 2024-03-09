@@ -1,23 +1,28 @@
-import type { ITask } from "@/types/tasks";
-import type { FilterQuery, ObjectId } from "mongoose";
+import type { TaskDocument, TaskPriority } from "@/types/tasks";
+import type { FilterQuery, ObjectId, Types } from "mongoose";
 
-export interface ITaskFilterText extends FilterQuery<ITask> {
+export interface TaskDocumentFilterText extends FilterQuery<TaskDocument> {
   $or: [{ name: { $in: string } }, { description: { $in: string } }];
 }
 
-export interface ITaskFilterDate extends FilterQuery<ITask> {
+export interface TaskDocumentFilterDate extends FilterQuery<TaskDocument> {
   dueDate: {
     $eq: Date;
   };
 }
 
-export interface ITaskCreate
-  extends Pick<ITask, "name" | "description" | "dueDate" | "priority"> {}
+export interface TaskDocumentCreate {
+  name: string;
+  description?: string;
+  tags?: Types.Array<ObjectId>;
+  priority?: TaskPriority;
+  dueDate?: Date;
+}
 
-export interface ITaskUpdate extends Partial<ITask> {
+export interface TaskDocumentUpdate extends Partial<TaskDocument> {
   id: ObjectId;
 }
 
-export interface ITaskDelete {
+export interface TaskDocumentDelete {
   id: ObjectId;
 }

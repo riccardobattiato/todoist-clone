@@ -1,10 +1,10 @@
-import type { ITag } from "@/types/tags";
+import type { TagDocument } from "@/types/tags";
 import { ObjectId } from "mongoose";
 
-export interface ITagCreate extends ITag {}
-export interface ITagUpdate extends ITag {
+export interface TagDocumentCreate extends TagDocument {}
+export interface TagDocumentUpdate extends TagDocument {
   id: ObjectId;
 }
-export interface ITagDelete {
+export interface TagDocumentDelete {
   id: ObjectId;
 }

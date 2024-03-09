@@ -1,25 +1,34 @@
-import type { ITagCreate, ITagUpdate, ITagDelete } from "./types";
+import type {
+  TagDocumentCreate,
+  TagDocumentUpdate,
+  TagDocumentDelete,
+} from "./types";
 import Tags from "./model";
-import type { ITag } from "@/types/tags";
+import type { TagDocument } from "@/types/tags";
+import { FilterQuery } from "mongoose";
 
-export async function createTag(data: ITagCreate): Promise<ITag | void> {
+export async function createTag(
+  data: TagDocumentCreate,
+): Promise<TagDocument | void> {
   return await Tags.create(data);
 }
 
-export async function findTags(): Promise<ITag[] | []> {
-  return await Tags.find({});
+export async function findTags(
+  filter?: FilterQuery<TagDocument>,
+): Promise<TagDocument[] | []> {
+  return await Tags.find(filter || {});
 }
 
 export async function updateTag({
   id,
   ...rest
-}: ITagUpdate): Promise<ITag | null | void> {
+}: TagDocumentUpdate): Promise<TagDocument | null | void> {
   return Tags.findByIdAndUpdate(id, rest, { new: true });
 }
 
 /**
  * @returns successful deletion
  */
-export async function deleteTag({ id }: ITagDelete): Promise<boolean> {
+export async function deleteTag({ id }: TagDocumentDelete): Promise<boolean> {
   return !!(await Tags.findByIdAndDelete(id));
 }

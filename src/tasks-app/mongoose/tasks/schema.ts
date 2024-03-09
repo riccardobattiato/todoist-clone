@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
-import { ITask } from "@/types/tasks";
+import { TaskDocument } from "@/types/tasks";
 
-export const TaskSchema = new Schema<ITask>({
+export const TaskSchema = new Schema<TaskDocument>({
   name: {
     type: "String",
     required: true,
@@ -10,4 +10,8 @@ export const TaskSchema = new Schema<ITask>({
   priority: "Number",
   dueDate: "Date",
   completed: "Boolean",
+  tags: {
+    type: [Schema.Types.ObjectId],
+    ref: "tags",
+  },
 });
