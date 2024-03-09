@@ -25,8 +25,8 @@ export const getLabelFromDate = (value: Date) => {
 export const getDueDateColor = (date: Date) => {
   const now = new Date();
   if (isToday(date)) return "text-green-600";
-  if (isBefore(date, now)) return "text-red-600";
-  if (isTomorrow(date)) return "text-orange-500";
+  if (isBefore(date, now)) return "text-orange-500";
+  if (isTomorrow(date)) return "text-orange-400";
   if (differenceInDays(date, now) < 7) return "text-violet-600";
   return "text-neutral-200";
 };
