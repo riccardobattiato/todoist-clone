@@ -5,6 +5,7 @@ import {
   isSameYear,
   isAfter,
   format,
+  isBefore,
 } from "date-fns";
 
 export const getLabelFromDate = (value: Date) => {
@@ -19,4 +20,13 @@ export const getLabelFromDate = (value: Date) => {
   if (!isSameYear(now, value)) return format(value, "d MMM yyyy");
 
   return format(value, "d MMM");
+};
+
+export const getDueDateColor = (date: Date) => {
+  const now = new Date();
+  if (isToday(date)) return "text-green-600";
+  if (isBefore(date, now)) return "text-red-600";
+  if (isTomorrow(date)) return "text-orange-500";
+  if (differenceInDays(date, now) < 7) return "text-violet-600";
+  return "text-neutral-200";
 };
