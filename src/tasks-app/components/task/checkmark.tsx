@@ -16,10 +16,10 @@ const TaskCheckmark = ({ active, onChange }: TaskCheckmarkProps) => {
   );
 
   return (
-    <div className="task-checkmark">
+    <div className="task-checkmark group relative w-5 h-5">
       <label
         className={clsx([
-          "task-checkmark__wrapper group relative cursor-pointer inline-block border-stone-400 border rounded-full w-5 h-5",
+          "task-checkmark__wrapper cursor-pointer inline-block w-full h-full border-stone-400 border rounded-full",
           {
             "text-neutral-800 bg-stone-400": active,
           },
