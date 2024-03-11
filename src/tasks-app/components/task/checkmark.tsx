@@ -1,13 +1,24 @@
 import { CheckIcon } from "@heroicons/react/16/solid";
 import { clsx } from "clsx";
-import { ChangeEventHandler, useCallback } from "react";
+import { ChangeEventHandler, useCallback, useMemo } from "react";
+import { TaskPriority } from "@/types/tasks";
+import { priorityColorsMap } from "@/utils/colors";
 
 export type TaskCheckmarkProps = {
   active?: boolean;
+  priority?: TaskPriority;
   onChange?: (checked: boolean) => void;
 };
 
-const TaskCheckmark = ({ active, onChange }: TaskCheckmarkProps) => {
+const TaskCheckmark = ({ active, priority, onChange }: TaskCheckmarkProps) => {
+  const isLowPriority = useMemo(
+    () => !priority || priority === TaskPriority.LOW,
+    [priority]
+  );
+  const colorClassName = useMemo(
+    () => priorityColorsMap[priority || TaskPriority.LOW],
+    [priority]
+  );
   const handleChange = useCallback<ChangeEventHandler<HTMLInputElement>>(
     (e) => {
       onChange?.(e.target.checked);
@@ -19,10 +30,13 @@ const TaskCheckmark = ({ active, onChange }: TaskCheckmarkProps) => {
     <div className="task-checkmark group relative w-5 h-5">
       <label
         className={clsx([
-          "task-checkmark__wrapper cursor-pointer inline-block w-full h-full border-stone-400 border rounded-full",
+          "task-checkmark__wrapper cursor-pointer inline-block w-full h-full relative border-current rounded-full overflow-hidden",
+          "after:inline-block after:absolute after:inset-0 after:bg-current after:opacity-10",
+          colorClassName,
           {
-            "text-neutral-800 bg-stone-400": active,
+            "bg-current": active,
           },
+          isLowPriority ? "border" : "border-2",
         ])}
       >
         <input
@@ -31,16 +45,18 @@ const TaskCheckmark = ({ active, onChange }: TaskCheckmarkProps) => {
           checked={active}
           onChange={handleChange}
         />
-        <CheckIcon
-          className={clsx([
-            "w-5/6 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
-            {
-              "invisible opacity-0 group-hover:visible group-hover:opacity-100":
-                !active,
-            },
-          ])}
-        />
       </label>
+      <CheckIcon
+        className={clsx([
+          "w-4/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
+          {
+            "invisible opacity-0 group-hover:visible group-hover:opacity-100":
+              !active,
+            [colorClassName]: !active,
+            "text-neutral-800": active,
+          },
+        ])}
+      />
     </div>
   );
 };

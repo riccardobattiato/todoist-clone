@@ -4,11 +4,13 @@ import type { TaskTag } from "./tags";
 import { clsx } from "clsx";
 import TaskTags from "./tags";
 import TaskDueDate from "./due-date";
+import { TaskPriority } from "@/types/tasks";
 
 export type TaskEntryProps = {
   id: string;
   name: string;
   description?: string;
+  priority?: TaskPriority;
   dueDate?: Date;
   completed?: boolean;
   tags?: TaskTag[];
@@ -19,6 +21,7 @@ const TaskEntry = ({
   id,
   name,
   description,
+  priority,
   dueDate,
   tags,
   completed,
@@ -35,7 +38,11 @@ const TaskEntry = ({
     <div className="task-entry">
       <div className="task-entry__wrapper grid grid-cols-[auto_1fr] cursor-pointer gap-x-2 items-center">
         <div className="task-entry__checkmark">
-          <TaskCheckmark onChange={handleChange} active={completed} />
+          <TaskCheckmark
+            onChange={handleChange}
+            priority={priority}
+            active={completed}
+          />
         </div>
         <div
           className={clsx([

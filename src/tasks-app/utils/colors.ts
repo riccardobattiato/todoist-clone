@@ -1,4 +1,5 @@
 import { Color } from "@/types/colors";
+import { TaskPriority } from "@/types/tasks";
 
 export const textColorsMap = {
   [Color.SLATE]: "text-slate-600",
@@ -44,4 +45,11 @@ export const bgColorsMap = {
   [Color.FUCHSIA]: "bg-fuchsia-600",
   [Color.PINK]: "bg-pink-600",
   [Color.ROSE]: "bg-rose-600",
+};
+
+export const priorityColorsMap = {
+  [TaskPriority.URGENT]: "text-red-600",
+  [TaskPriority.HIGH]: "text-orange-600",
+  [TaskPriority.NORMAL]: "text-blue-500",
+  [TaskPriority.LOW]: "text-neutral-300",
 };
