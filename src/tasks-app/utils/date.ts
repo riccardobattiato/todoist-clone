@@ -2,6 +2,7 @@ import {
   differenceInDays,
   isToday,
   isTomorrow,
+  isYesterday,
   isSameYear,
   isAfter,
   format,
@@ -9,6 +10,7 @@ import {
 } from "date-fns";
 
 export const getLabelFromDate = (value: Date) => {
+  if (isYesterday(value)) return "Yesterday";
   if (isToday(value)) return "Today";
   if (isTomorrow(value)) return "Tomorrow";
   const now = new Date();
