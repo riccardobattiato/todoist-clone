@@ -10,7 +10,7 @@ export enum TaskPriority {
 
 // App version, returned by GraphQL queries
 export interface ITask {
-  _id: string;
+  _id?: string;
   name: string;
   description?: string;
   tags?: ITag[];

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.9.6",
     "@apollo/server": "^4.10.0",
     "@as-integrations/next": "^3.0.0",
     "@heroicons/react": "^2.1.1",

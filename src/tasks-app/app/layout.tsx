@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Providers from "./providers";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -12,13 +13,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="w-full h-screen">
-        {/*         <aside>
+    <Providers>
+      <html lang="en">
+        <body className="w-full h-screen">
+          {/*         <aside>
           Sidebar
         </aside> */}
-        <main className="h-full bg-neutral-800 text-white">{children}</main>
-      </body>
-    </html>
+          <main className="h-full bg-neutral-800 text-white">{children}</main>
+        </body>
+      </html>
+    </Providers>
   );
 }
