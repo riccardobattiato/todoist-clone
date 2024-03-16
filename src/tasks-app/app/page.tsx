@@ -5,7 +5,7 @@ import AddTask from "@/components/add-task";
 
 export default function Home() {
   return (
-    <div className="pt-10">
+    <div className="h-full py-10">
       <div className="w-5/6 mx-auto">
         <div className="">
           <TaskList />

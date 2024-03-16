@@ -18,7 +18,7 @@ const AddTask = () => {
       <div
         className={clsx([
           "add-task__form",
-          { "absolute invisible": !isEditing },
+          { "absolute h-0 overflow-hidden invisible": !isEditing },
         ])}
       >
         <AddTaskForm
@@ -34,7 +34,7 @@ const AddTask = () => {
         className={clsx([
           "add-task__button",
           {
-            "absolute invisible opacity-0": isEditing,
+            "absolute h-0 overflow-hidden invisible opacity-0": isEditing,
             "delay-75 transition-all": !isEditing,
           },
         ])}
