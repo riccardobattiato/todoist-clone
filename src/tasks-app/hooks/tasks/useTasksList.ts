@@ -1,5 +1,4 @@
 import { useQuery, gql } from "@apollo/client";
-import { ITask } from "@/types/tasks";
 import { useMemo } from "react";
 import { mapTasksToProps } from "@/components/task/map";
 

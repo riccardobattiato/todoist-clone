@@ -1,4 +1,4 @@
-import TaskEntry, { TaskEntryProps } from "@/components/task/entry";
+import TaskEntry from "@/components/task/entry";
 import { useTasksList } from "@/hooks/tasks/useTasksList";
 
 const TaskList = () => {

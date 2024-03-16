@@ -1,9 +1,6 @@
 "use client";
 
 import TaskList from "@/components/task-list";
-import { useMemo } from "react";
-import { useTasksList } from "@/hooks/tasks/useTasksList";
-import { mapTasksToProps } from "@/components/task/map";
 import AddTask from "@/components/add-task";
 
 export default function Home() {
