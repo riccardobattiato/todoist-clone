@@ -5,6 +5,7 @@ import { clsx } from "clsx";
 import TaskTags from "./tags";
 import TaskDueDate from "./due-date";
 import { TaskPriority } from "@/types/tasks";
+import TaskEntryActions from "./entry-actions";
 
 export type TaskEntryProps = {
   id: string;
@@ -35,7 +36,7 @@ const TaskEntry = ({
   );
 
   return (
-    <div className="task-entry">
+    <div className="task-entry group/entry relative min-h-6 flex items-center">
       <div className="task-entry__wrapper grid grid-cols-[auto_1fr] cursor-pointer gap-x-2 items-center">
         <div className="task-entry__checkmark">
           <TaskCheckmark
@@ -75,6 +76,9 @@ const TaskEntry = ({
             </div>
           )}
         </div>
+      </div>
+      <div className="task-entry__actions absolute top-0 right-0 hidden group-hover/entry:block">
+        <TaskEntryActions />
       </div>
     </div>
   );
