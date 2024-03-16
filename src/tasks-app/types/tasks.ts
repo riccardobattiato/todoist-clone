@@ -28,3 +28,8 @@ export interface TaskDocument extends Document {
   dueDate?: Date;
   completed?: boolean;
 }
+
+export interface AddTaskFormPayload {
+  name: string;
+  description?: string
+}

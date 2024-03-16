@@ -1,4 +1,4 @@
-import TaskEntry, { TaskEntryProps } from "./entry";
+import TaskEntry, { TaskEntryProps } from "@/components/task/entry";
 
 export type TaskListProps = {
   items: TaskEntryProps[];
