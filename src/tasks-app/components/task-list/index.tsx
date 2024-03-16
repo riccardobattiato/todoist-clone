@@ -1,13 +1,11 @@
 import TaskEntry, { TaskEntryProps } from "@/components/task/entry";
+import { useTasksList } from "@/hooks/tasks/useTasksList";
 
-export type TaskListProps = {
-  items: TaskEntryProps[];
-};
-
-const TaskList = ({ items }: TaskListProps) => {
+const TaskList = () => {
+  const { taskList } = useTasksList();
   return (
     <div className="task-list">
-      {items.map((item, i) => (
+      {taskList.map((item, i) => (
         <div
           className="task-list__entry border-b py-2 border-neutral-700"
           key={`item-${i}`}

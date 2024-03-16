@@ -1,39 +1,31 @@
-import { useCallback, useState } from "react";
 import AddTaskButton from "./button";
 import AddTaskForm from "./form";
 import clsx from "clsx";
-import { AddTaskFormPayload } from "@/types/tasks";
+import { useAddTask } from "@/hooks/tasks/useAddTask";
 
-interface AddTaskProps {
-  onSubmit?: (data: AddTaskFormPayload) => void;
-}
-
-const AddTask = ({ onSubmit }: AddTaskProps) => {
-  const [active, setActive] = useState(false);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleCancel = useCallback(() => {
-    setName("");
-    setDescription("");
-    setActive(false);
-  }, []);
-
-  const handleSubmit = useCallback(() => {
-    onSubmit?.({ name, description });
-    handleCancel();
-  }, [onSubmit]);
+const AddTask = () => {
+  const {
+    payload,
+    handleInput,
+    handleSubmit,
+    isEditing,
+    setIsEditing,
+    handleCancel,
+  } = useAddTask();
 
   return (
     <div className="add-task">
       <div
-        className={clsx(["add-task__form", { "absolute invisible": !active }])}
+        className={clsx([
+          "add-task__form",
+          { "absolute invisible": !isEditing },
+        ])}
       >
         <AddTaskForm
-          name={name}
-          description={description}
-          onInputName={setName}
-          onInputDescription={setDescription}
+          name={payload.name}
+          description={payload.description}
+          onInputName={handleInput.name}
+          onInputDescription={handleInput.description}
           onSubmit={handleSubmit}
           onCancel={handleCancel}
         />
@@ -42,12 +34,12 @@ const AddTask = ({ onSubmit }: AddTaskProps) => {
         className={clsx([
           "add-task__button",
           {
-            "absolute invisible opacity-0": active,
-            "delay-75 transition-all": !active,
+            "absolute invisible opacity-0": isEditing,
+            "delay-75 transition-all": !isEditing,
           },
         ])}
       >
-        <AddTaskButton onClick={() => setActive(true)} />
+        <AddTaskButton onClick={() => setIsEditing(true)} />
       </div>
     </div>
   );

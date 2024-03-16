@@ -1,8 +1,9 @@
 import { useQuery, gql } from "@apollo/client";
 import { ITask } from "@/types/tasks";
 import { useMemo } from "react";
+import { mapTasksToProps } from "@/components/task/map";
 
-export const useTasksFetch = () => {
+export const useTasksList = () => {
   const { data, loading, error } = useQuery(
     gql`
       query AllTasks {
@@ -23,7 +24,10 @@ export const useTasksFetch = () => {
     `
   );
 
-  const allTasks = useMemo<ITask[]>(() => data?.allTasks || [], [data]);
+  const taskList = useMemo(
+    () => (data?.allTasks ? mapTasksToProps(data.allTasks) : []),
+    [data]
+  );
 
-  return { allTasks, loading, error };
+  return { taskList, loading, error };
 };
