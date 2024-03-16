@@ -49,7 +49,7 @@ const InputAutogrow = ({
         ref={contentEditableRef}
         className={clsx(
           [
-            "input-name__input relative outline-none break-words",
+            "input-name__input relative outline-none cursor-text break-words",
             "after:absolute after:content-[attr(data-placeholder)] after:inset-0 after:text-zinc-400",
             inputClassName,
           ],

@@ -20,7 +20,7 @@ const AddTaskForm = ({
   onCancel,
 }: AddTaskFormProps) => {
   return (
-    <div className="add-task-form border border-neutral-700 rounded-xl">
+    <div className="add-task-form border border-neutral-700 focus-within:border-neutral-500 rounded-xl">
       <div className="add-task-form__content p-3">
         <div className="add-task-form__name">
           <InputAutogrow
