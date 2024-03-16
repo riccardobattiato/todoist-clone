@@ -1,6 +1,6 @@
 import InputAutogrow from "@/components/input-autogrow";
 import TaskButton from "../task-button";
-import { AddTaskFormPayload } from "@/types/tasks";
+import TaskSettings from "../task-settings";
 
 export interface AddTaskFormProps {
   name: string;
@@ -40,7 +40,9 @@ const AddTaskForm = ({
             placeholderClassName="text-zinc-400"
           />
         </div>
-        <div className="add-task-form__settings mt-2">Settings</div>
+        <div className="add-task-form__settings mt-2">
+          <TaskSettings />
+        </div>
       </div>
       <div className="add-task-form__actions border-t border-neutral-700 p-3 flex justify-between items-center">
         <div className="add-task-form__project">

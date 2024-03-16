@@ -24,7 +24,8 @@ export const getLabelFromDate = (value: Date) => {
   return format(value, "d MMM");
 };
 
-export const getDueDateColor = (date: Date) => {
+export const getDueDateColor = (date?: Date) => {
+  if (!date) return "text-neutral-400";
   const now = new Date();
   if (isToday(date)) return "text-green-600";
   if (isBefore(date, now)) return "text-orange-500";
