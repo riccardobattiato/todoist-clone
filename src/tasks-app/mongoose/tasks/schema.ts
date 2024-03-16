@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { TaskDocument } from "@/types/tasks";
+import { TaskDocument, TaskPriority } from "@/types/tasks";
 
 export const TaskSchema = new Schema<TaskDocument>({
   name: {
@@ -7,7 +7,10 @@ export const TaskSchema = new Schema<TaskDocument>({
     required: true,
   },
   description: "String",
-  priority: "Number",
+  priority: {
+    type: "Number",
+    default: TaskPriority.LOW,
+  },
   dueDate: "Date",
   completed: "Boolean",
   tags: {
