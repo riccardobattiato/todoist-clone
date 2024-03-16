@@ -19,19 +19,9 @@ const InputAutogrow = ({
   value,
   placeholder,
   inputClassName,
-  placeholderClassName,
   onInput,
 }: InputAutogrowProps) => {
   const contentEditableRef = useRef<HTMLDivElement>(null);
-  // Main div's after acts as placeholder text
-  const appliedPlaceholderClassNames = useMemo(
-    () =>
-      placeholderClassName
-        ?.split(" ")
-        .map((className) => `after:${className}`)
-        .join(" "),
-    [placeholderClassName]
-  );
 
   const handleInput = useCallback<FormEventHandler<HTMLDivElement>>(
     (e) => {
@@ -60,9 +50,8 @@ const InputAutogrow = ({
         className={clsx(
           [
             "input-name__input relative outline-none break-words",
-            "after:absolute after:content-[attr(data-placeholder)] after:inset-0",
+            "after:absolute after:content-[attr(data-placeholder)] after:inset-0 after:text-zinc-400",
             inputClassName,
-            appliedPlaceholderClassNames,
           ],
           {
             "after:hidden": !!value,

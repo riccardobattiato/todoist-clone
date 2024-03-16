@@ -28,7 +28,6 @@ const AddTaskForm = ({
             value={name}
             onInput={onInputName}
             inputClassName="text-sm font-medium"
-            placeholderClassName="text-zinc-400"
           />
         </div>
         <div className="add-task-form__description mt-1">
@@ -37,7 +36,6 @@ const AddTaskForm = ({
             value={description}
             onInput={onInputDescription}
             inputClassName="text-ms font-light"
-            placeholderClassName="text-zinc-400"
           />
         </div>
         <div className="add-task-form__settings mt-2">
