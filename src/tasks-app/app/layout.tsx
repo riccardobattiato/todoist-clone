@@ -15,11 +15,11 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="en">
-        <body className="w-full h-screen">
+        <body className="w-full">
           {/*         <aside>
           Sidebar
         </aside> */}
-          <main className="h-full bg-neutral-800 text-white">{children}</main>
+          <main className="min-h-screen bg-neutral-800 text-white">{children}</main>
         </body>
       </html>
     </Providers>
