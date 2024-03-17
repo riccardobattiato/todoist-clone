@@ -12,10 +12,17 @@ interface TaskListProps {
   data: TaskEntryProps[];
   editingId?: string;
   onEdit?: (data: EditTaskFormPayload) => void;
+  onDelete?: (value: string) => void;
   toggleEdit?: (value: string) => void;
 }
 
-const TaskList = ({ data, editingId, onEdit, toggleEdit }: TaskListProps) => {
+const TaskList = ({
+  data,
+  editingId,
+  onEdit,
+  onDelete,
+  toggleEdit,
+}: TaskListProps) => {
   const handleFormSubmit = useCallback(
     (payload: AddTaskFormPayload | EditTaskFormPayload) => {
       if (!isEditPayload(payload))
@@ -48,6 +55,7 @@ const TaskList = ({ data, editingId, onEdit, toggleEdit }: TaskListProps) => {
               key={`task-${i}`}
               {...item}
               onToggleEdit={() => toggleEdit?.(item.id)}
+              onDelete={() => onDelete?.(item.id)}
             />
           )}
         </div>

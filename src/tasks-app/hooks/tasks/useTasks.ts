@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { useUpdateTask } from "./useUpdateTask";
-import { AddTaskFormPayload } from "@/types/tasks";
 import { useGetTasks } from "./useGetTasks";
 import { mapTasksToProps } from "@/components/task/map";
 import { useCreateTask } from "./useCreateTask";
+import { useDeleteTask } from "./useDeleteTask";
 
 export const useTasks = () => {
   const {
@@ -21,6 +21,11 @@ export const useTasks = () => {
     loading: loadingUpdateTask,
     error: errorUpdateTask,
   } = useUpdateTask();
+  const {
+    submit: deleteTask,
+    loading: loadingDeleteTask,
+    error: errorDeleteTask,
+  } = useDeleteTask();
 
   const [editingId, setEditingId] = useState("");
 
@@ -33,5 +38,12 @@ export const useTasks = () => {
     setEditingId(value);
   }, []);
 
-  return { list, editingId, toggleTaskForm, createTask, updateTask };
+  return {
+    list,
+    editingId,
+    toggleTaskForm,
+    createTask,
+    updateTask,
+    deleteTask,
+  };
 };

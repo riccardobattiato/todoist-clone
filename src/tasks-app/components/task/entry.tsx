@@ -16,6 +16,7 @@ export type TaskEntryProps = {
   tags?: TaskTag[];
   onToggleEdit?: () => void;
   onChange?: (id: string, value: boolean) => void;
+  onDelete?: () => void;
 };
 
 const TaskEntry = ({
@@ -28,6 +29,7 @@ const TaskEntry = ({
   completed,
   onChange,
   onToggleEdit,
+  onDelete,
 }: TaskEntryProps) => {
   const handleChange = useCallback(
     (value: boolean) => {
@@ -56,7 +58,7 @@ const TaskEntry = ({
         </div>
       </div>
       <div className="task-entry__actions absolute top-0 right-0 hidden group-hover/entry:block">
-        <TaskEntryActions onEdit={onToggleEdit} />
+        <TaskEntryActions onEdit={onToggleEdit} onDelete={onDelete} />
       </div>
     </div>
   );

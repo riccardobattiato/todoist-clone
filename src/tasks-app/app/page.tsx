@@ -5,8 +5,14 @@ import AddTask from "@/components/add-task";
 import { useTasks } from "@/hooks/tasks/useTasks";
 
 export default function Home() {
-  const { list, editingId, toggleTaskForm, createTask, updateTask } =
-    useTasks();
+  const {
+    list,
+    editingId,
+    toggleTaskForm,
+    createTask,
+    updateTask,
+    deleteTask,
+  } = useTasks();
 
   return (
     <div className="h-full py-10">
@@ -16,6 +22,7 @@ export default function Home() {
             data={list}
             editingId={editingId}
             onEdit={updateTask}
+            onDelete={deleteTask}
             toggleEdit={toggleTaskForm}
           />
         </div>
