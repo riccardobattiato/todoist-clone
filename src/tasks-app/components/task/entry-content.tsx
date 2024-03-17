@@ -7,7 +7,6 @@ import { TaskPriority } from "@/types/tasks";
 export type TaskEntryContentProps = {
   name: string;
   description?: string;
-  priority?: TaskPriority;
   dueDate?: Date;
   completed?: boolean;
   tags?: TaskTag[];
@@ -17,7 +16,6 @@ export type TaskEntryContentProps = {
 const TaskEntryContent = ({
   name,
   description,
-  priority,
   dueDate,
   tags,
   completed,

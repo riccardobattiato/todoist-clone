@@ -54,6 +54,7 @@ const TaskEntry = ({
             description={description}
             dueDate={dueDate}
             tags={tags}
+            completed={completed}
           />
         </div>
       </div>
