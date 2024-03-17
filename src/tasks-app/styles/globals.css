@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .u-task-settings-btn {
-  @apply inline-flex justify-center items-center cursor-pointer border border-neutral-700 px-2 py-1 rounded hover:bg-neutral-700;
+  @apply inline-flex justify-center items-center cursor-pointer border border-neutral-700 px-2 py-1 rounded hover:bg-neutral-700 active:bg-neutral-700 focus:bg-neutral-700;
 }

@@ -34,9 +34,10 @@ const AddTaskForm = ({
   );
 
   const handleInput = useCallback(
-    (key: keyof AddTaskFormPayload) => (value: string) => {
-      setPayload({ ...payload, [key]: value });
-    },
+    (key: keyof AddTaskFormPayload) =>
+      (value: AddTaskFormPayload[typeof key]) => {
+        setPayload({ ...payload, [key]: value });
+      },
     [payload]
   );
 
@@ -45,6 +46,7 @@ const AddTaskForm = ({
       id: initialData?.id,
       name: payload.name,
       description: payload.description,
+      priority: payload.priority,
     });
   }, [initialData, payload, onSubmit]);
 
@@ -73,7 +75,11 @@ const AddTaskForm = ({
           />
         </div>
         <div className="add-task-form__settings mt-2">
-          <TaskSettings dueDate={payload.dueDate} priority={payload.priority} />
+          <TaskSettings
+            dueDate={payload.dueDate}
+            priority={payload.priority}
+            onChangePriority={handleInput("priority")}
+          />
         </div>
       </div>
       <div className="add-task-form__actions border-t border-neutral-700 p-3 flex justify-between items-center">

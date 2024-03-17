@@ -47,6 +47,7 @@ export const useUpdateTask = () => {
         id: payload.id,
         name: payload.name,
         description: payload.description,
+        priority: payload.priority,
       },
     });
   }, []);
