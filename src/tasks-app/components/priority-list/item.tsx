@@ -8,21 +8,24 @@ import { priorityColorsMap } from "@/utils/colors";
 interface PriorityListItemProps {
   value?: TaskPriority;
   active?: boolean;
+  selected?: boolean;
   onClick?: () => void;
 }
 
 const PriorityListItem = ({
   value,
   active,
+  selected,
   onClick,
 }: PriorityListItemProps) => {
   const isLowPriority = !value || value === TaskPriority.LOW;
   return (
     <button
       className={clsx([
-        "priority-list-item relative py-2 pl-3 pr-10 flex w-full items-center gap-2 bg-neutral-800 hover:bg-neutral-600",
+        "priority-list-item relative py-2 pl-3 pr-10 flex w-full items-center gap-2 hover:bg-neutral-600",
         {
-          "": !value,
+          "bg-neutral-600": active,
+          "bg-neutral-800": !active,
         },
       ])}
       onClick={onClick}
@@ -46,7 +49,7 @@ const PriorityListItem = ({
         className={clsx([
           "priority-list-item__checkmark absolute top-1/2 right-3 -translate-y-1/2",
           {
-            hidden: !active,
+            hidden: !selected,
           },
         ])}
       >

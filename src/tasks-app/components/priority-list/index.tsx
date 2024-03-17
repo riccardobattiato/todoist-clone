@@ -46,11 +46,14 @@ const PriorityList = ({ value, onChange }: PriorityListProps) => {
         >
           {priorities.map((priority) => (
             <Menu.Item key={`priority-${priority}`}>
-              <PriorityListItem
-                value={priority}
-                active={value === priority}
-                onClick={handleClick(priority)}
-              />
+              {({ active }) => (
+                <PriorityListItem
+                  value={priority}
+                  selected={value === priority}
+                  active={active}
+                  onClick={handleClick(priority)}
+                />
+              )}
             </Menu.Item>
           ))}
         </Menu.Items>
