@@ -1,7 +1,7 @@
 import { ITag } from "@/types/tags";
 import { TaskPriority } from "@/types/tasks";
 import TaskSettingsDueDate from "./due-date";
-import TaskSettingsPriority from "./priority";
+import PriorityList from "@/components/priority-list";
 import TaskSettingsTags from "./tags";
 
 interface TaskSettingsProps {
@@ -17,7 +17,7 @@ const TaskSettings = ({ dueDate, priority, tags }: TaskSettingsProps) => {
         <TaskSettingsDueDate value={dueDate} />
       </div>
       <div className="task-settings__priority">
-        <TaskSettingsPriority value={priority} />
+        <PriorityList value={priority} />
       </div>
       <div className="task-settings__tags">
         <TaskSettingsTags />
