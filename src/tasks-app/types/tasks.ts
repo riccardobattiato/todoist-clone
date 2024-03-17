@@ -31,5 +31,15 @@ export interface TaskDocument extends Document {
 
 export interface AddTaskFormPayload {
   name: string;
-  description?: string
+  description?: string;
+  dueDate?: Date;
+  priority?: TaskPriority;
 }
+
+export interface EditTaskFormPayload extends Partial<AddTaskFormPayload> {
+  id: string;
+}
+
+export const isEditPayload = (
+  payload: AddTaskFormPayload | EditTaskFormPayload
+): payload is EditTaskFormPayload => "id" in payload;

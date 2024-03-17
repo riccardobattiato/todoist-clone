@@ -1,17 +1,29 @@
 import AddTaskButton from "./button";
 import AddTaskForm from "./form";
 import clsx from "clsx";
-import { useAddTask } from "@/hooks/tasks/useAddTask";
+import { AddTaskFormPayload, EditTaskFormPayload } from "@/types/tasks";
+import { useCallback, useMemo } from "react";
 
-const AddTask = () => {
-  const {
-    payload,
-    handleInput,
-    handleSubmit,
-    isEditing,
-    setIsEditing,
-    handleCancel,
-  } = useAddTask();
+interface AddTaskProps {
+  onSubmit?: (data: AddTaskFormPayload) => void;
+  editingId?: string;
+  toggleEdit?: (value: string) => void;
+}
+
+const AddTask = ({ onSubmit, editingId, toggleEdit }: AddTaskProps) => {
+  const isEditing = useMemo(() => editingId === "new", [editingId]);
+  const handleCancel = useCallback(() => {
+    toggleEdit?.("");
+  }, []);
+
+  const handleSubmit = useCallback(
+    (payload: AddTaskFormPayload | EditTaskFormPayload) => {
+      if (!payload.name) throw new Error("Cannot create task without name");
+      onSubmit?.({ name: payload.name, description: payload.description });
+      handleCancel();
+    },
+    [onSubmit]
+  );
 
   return (
     <div className="add-task">
@@ -21,14 +33,7 @@ const AddTask = () => {
           { "absolute h-0 overflow-hidden invisible": !isEditing },
         ])}
       >
-        <AddTaskForm
-          name={payload.name}
-          description={payload.description}
-          onInputName={handleInput.name}
-          onInputDescription={handleInput.description}
-          onSubmit={handleSubmit}
-          onCancel={handleCancel}
-        />
+        <AddTaskForm onSubmit={handleSubmit} onCancel={handleCancel} />
       </div>
       <div
         className={clsx([
@@ -39,7 +44,7 @@ const AddTask = () => {
           },
         ])}
       >
-        <AddTaskButton onClick={() => setIsEditing(true)} />
+        <AddTaskButton onClick={() => toggleEdit?.("new")} />
       </div>
     </div>
   );

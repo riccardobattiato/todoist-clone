@@ -1,45 +1,79 @@
 import InputAutogrow from "@/components/input-autogrow";
 import TaskButton from "../task-button";
 import TaskSettings from "../task-settings";
+import {
+  AddTaskFormPayload,
+  EditTaskFormPayload,
+  TaskPriority,
+} from "@/types/tasks";
+import { useCallback, useState } from "react";
+import { TaskEntryProps } from "../task/entry";
 
 export interface AddTaskFormProps {
-  name: string;
-  description?: string;
-  onInputName?: (value: string) => void;
-  onInputDescription?: (value: string) => void;
-  onSubmit?: () => void;
+  initialData?: TaskEntryProps;
+  dueDate?: Date;
+  priority?: TaskPriority;
+  isEditing?: boolean;
+  onSubmit?: (payload: AddTaskFormPayload | EditTaskFormPayload) => void;
   onCancel?: () => void;
 }
 
+const defaultData: AddTaskFormPayload = {
+  name: "",
+  description: "",
+};
+
 const AddTaskForm = ({
-  name,
-  description,
-  onInputName,
-  onInputDescription,
+  initialData,
+  isEditing,
   onSubmit,
   onCancel,
 }: AddTaskFormProps) => {
+  const [payload, setPayload] = useState<AddTaskFormPayload>(
+    initialData || defaultData
+  );
+
+  const handleInput = useCallback(
+    (key: keyof AddTaskFormPayload) => (value: string) => {
+      setPayload({ ...payload, [key]: value });
+    },
+    [payload]
+  );
+
+  const handleSubmit = useCallback(() => {
+    onSubmit?.({
+      id: initialData?.id,
+      name: payload.name,
+      description: payload.description,
+    });
+  }, [initialData, payload, onSubmit]);
+
+  const handleCancel = useCallback(() => {
+    setPayload(defaultData);
+    onCancel?.();
+  }, [onCancel]);
+
   return (
     <div className="add-task-form border border-neutral-700 focus-within:border-neutral-500 rounded-xl">
       <div className="add-task-form__content p-3">
         <div className="add-task-form__name">
           <InputAutogrow
             placeholder="Task name"
-            value={name}
-            onInput={onInputName}
+            value={payload.name}
+            onInput={handleInput("name")}
             inputClassName="text-sm font-medium"
           />
         </div>
         <div className="add-task-form__description mt-1">
           <InputAutogrow
             placeholder="Description"
-            value={description}
-            onInput={onInputDescription}
+            value={payload.description}
+            onInput={handleInput("description")}
             inputClassName="text-ms font-light"
           />
         </div>
         <div className="add-task-form__settings mt-2">
-          <TaskSettings />
+          <TaskSettings dueDate={payload.dueDate} priority={payload.priority} />
         </div>
       </div>
       <div className="add-task-form__actions border-t border-neutral-700 p-3 flex justify-between items-center">
@@ -49,14 +83,14 @@ const AddTaskForm = ({
         </div>
         <div className="add-task-form__buttons flex items-center gap-2">
           <div className="add-task-form__cancel-btn">
-            <TaskButton label="Cancel" theme="neutral" onClick={onCancel} />
+            <TaskButton label="Cancel" theme="neutral" onClick={handleCancel} />
           </div>
           <div className="add-task-form__submit-btn">
             <TaskButton
-              label="Add task"
+              label={isEditing ? "Save" : "Add task"}
               theme="primary"
-              disabled={!name}
-              onClick={onSubmit}
+              disabled={!payload?.name}
+              onClick={handleSubmit}
             />
           </div>
         </div>

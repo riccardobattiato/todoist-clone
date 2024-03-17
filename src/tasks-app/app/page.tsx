@@ -2,16 +2,29 @@
 
 import TaskList from "@/components/task-list";
 import AddTask from "@/components/add-task";
+import { useTasks } from "@/hooks/tasks/useTasks";
 
 export default function Home() {
+  const { list, editingId, toggleTaskForm, createTask, updateTask } =
+    useTasks();
+
   return (
     <div className="h-full py-10">
       <div className="w-5/6 mx-auto">
         <div className="">
-          <TaskList />
+          <TaskList
+            data={list}
+            editingId={editingId}
+            onEdit={updateTask}
+            toggleEdit={toggleTaskForm}
+          />
         </div>
         <div className="">
-          <AddTask />
+          <AddTask
+            editingId={editingId}
+            toggleEdit={toggleTaskForm}
+            onSubmit={createTask}
+          />
         </div>
       </div>
     </div>

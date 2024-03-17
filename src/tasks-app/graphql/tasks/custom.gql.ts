@@ -21,7 +21,7 @@ export default gql`
 
   input TaskUpdate {
     id: String!
-    name: String!
+    name: String
     description: String
     priority: Int
     dueDate: Date

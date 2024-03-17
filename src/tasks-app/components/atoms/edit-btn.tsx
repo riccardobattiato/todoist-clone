@@ -5,7 +5,7 @@ interface EditBtnProps {
 }
 
 const EditBtn = ({ onClick }: EditBtnProps) => (
-  <button>
+  <button onClick={onClick}>
     <PencilSquareIcon className="w-6" />
   </button>
 );

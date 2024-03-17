@@ -1,8 +1,6 @@
 import { useQuery, gql } from "@apollo/client";
-import { useMemo } from "react";
-import { mapTasksToProps } from "@/components/task/map";
 
-export const useTasksList = () => {
+export const useGetTasks = () => {
   const { data, loading, error } = useQuery(
     gql`
       query AllTasks {
@@ -23,10 +21,5 @@ export const useTasksList = () => {
     `
   );
 
-  const taskList = useMemo(
-    () => (data?.allTasks ? mapTasksToProps(data.allTasks) : []),
-    [data]
-  );
-
-  return { taskList, loading, error };
+  return { data, loading, error };
 };
