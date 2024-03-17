@@ -12,7 +12,10 @@ export const TaskSchema = new Schema<TaskDocument>({
     default: TaskPriority.LOW,
   },
   dueDate: "Date",
-  completed: "Boolean",
+  completed: {
+    type: "Boolean",
+    default: false,
+  },
   tags: {
     type: [Schema.Types.ObjectId],
     ref: "tags",
