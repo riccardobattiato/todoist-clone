@@ -40,7 +40,7 @@ export const useCreateTask = () => {
 
   const submit = useCallback(async (payload: AddTaskFormPayload) => {
     await createTask({
-      variables: { name: payload.name, description: payload.description },
+      variables: payload,
     });
   }, []);
 

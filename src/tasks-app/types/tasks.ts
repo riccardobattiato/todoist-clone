@@ -43,4 +43,4 @@ export interface EditTaskFormPayload extends Partial<AddTaskFormPayload> {
 
 export const isEditPayload = (
   payload: AddTaskFormPayload | EditTaskFormPayload
-): payload is EditTaskFormPayload => "id" in payload;
+): payload is EditTaskFormPayload => "id" in payload && !!payload.id;

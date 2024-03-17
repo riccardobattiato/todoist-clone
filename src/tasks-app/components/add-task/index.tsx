@@ -1,7 +1,11 @@
 import AddTaskButton from "./button";
 import AddTaskForm from "./form";
 import clsx from "clsx";
-import { AddTaskFormPayload, EditTaskFormPayload } from "@/types/tasks";
+import {
+  AddTaskFormPayload,
+  EditTaskFormPayload,
+  isEditPayload,
+} from "@/types/tasks";
 import { useCallback, useMemo } from "react";
 
 interface AddTaskProps {
@@ -18,9 +22,11 @@ const AddTask = ({ onSubmit, editingId, toggleEdit }: AddTaskProps) => {
 
   const handleSubmit = useCallback(
     (payload: AddTaskFormPayload | EditTaskFormPayload) => {
-      if (!payload.name) throw new Error("Cannot create task without name");
-      onSubmit?.({ name: payload.name, description: payload.description });
-      handleCancel();
+      if (!isEditPayload(payload)) {
+        if (!payload.name) throw new Error("Cannot create task without name");
+        onSubmit?.(payload);
+        handleCancel();
+      }
     },
     [onSubmit]
   );
