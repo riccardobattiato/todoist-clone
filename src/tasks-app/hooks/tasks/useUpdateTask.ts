@@ -11,6 +11,7 @@ export const useUpdateTask = () => {
         $description: String
         $dueDate: Date
         $priority: Int
+        $completed: Boolean
       ) {
         updateTask(
           input: {
@@ -19,6 +20,7 @@ export const useUpdateTask = () => {
             description: $description
             dueDate: $dueDate
             priority: $priority
+            completed: $completed
           }
         ) {
           _id
@@ -43,12 +45,7 @@ export const useUpdateTask = () => {
 
   const submit = useCallback(async (payload: EditTaskFormPayload) => {
     await updateTask({
-      variables: {
-        id: payload.id,
-        name: payload.name,
-        description: payload.description,
-        priority: payload.priority,
-      },
+      variables: payload,
     });
   }, []);
 

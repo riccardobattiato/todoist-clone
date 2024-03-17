@@ -48,7 +48,7 @@ const TaskCheckmark = ({ active, priority, onChange }: TaskCheckmarkProps) => {
       </label>
       <CheckIcon
         className={clsx([
-          "w-4/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300",
+          "w-4/5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-none",
           {
             "invisible opacity-0 group-hover:visible group-hover:opacity-100":
               !active,

@@ -38,6 +38,7 @@ export interface AddTaskFormPayload {
 
 export interface EditTaskFormPayload extends Partial<AddTaskFormPayload> {
   id: string;
+  completed?: boolean;
 }
 
 export const isEditPayload = (

@@ -33,6 +33,14 @@ const TaskList = ({
     []
   );
 
+  const handleTaskCheck = useCallback(
+    (id: string, value: boolean) => {
+      onEdit?.({ id, completed: value });
+      if (editingId) toggleEdit?.("");
+    },
+    [editingId]
+  );
+
   return (
     <div className="task-list">
       {data.map((item, i) => (
@@ -54,6 +62,7 @@ const TaskList = ({
             <TaskEntry
               key={`task-${i}`}
               {...item}
+              onChange={handleTaskCheck}
               onToggleEdit={() => toggleEdit?.(item.id)}
               onDelete={() => onDelete?.(item.id)}
             />
