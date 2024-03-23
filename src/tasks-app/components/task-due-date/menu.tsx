@@ -9,10 +9,12 @@ import {
   startOfTomorrow,
   nextSaturday,
   nextMonday,
+  isSameDay,
 } from "date-fns";
 import { getQuickChoiceLabelFromDate } from "@/utils/date";
 
 interface TaskDueDateMenuProps {
+  value?: Date;
   onChange?: (value: Date) => void;
   onClear?: () => void;
 }
@@ -76,18 +78,24 @@ const TaskDueDateMenuButton = ({
   </button>
 );
 
-const TaskDueDateMenu = ({ onChange, onClear }: TaskDueDateMenuProps) => {
+const TaskDueDateMenu = ({
+  value,
+  onChange,
+  onClear,
+}: TaskDueDateMenuProps) => {
   return (
     <div className="task-due-date-menu">
-      {items.map((item, i) => (
-        <div className="task-due-date-menu__item" key={`item-${i}`}>
-          <TaskDueDateMenuButton
-            {...item}
-            onChange={onChange}
-            onClear={onClear}
-          />
-        </div>
-      ))}
+      {items
+        .filter((item) => !value || !item.date || !isSameDay(value, item.date))
+        .map((item, i) => (
+          <div className="task-due-date-menu__item" key={`item-${i}`}>
+            <TaskDueDateMenuButton
+              {...item}
+              onChange={onChange}
+              onClear={onClear}
+            />
+          </div>
+        ))}
     </div>
   );
 };
