@@ -1,7 +1,7 @@
 import type { TaskTag } from "./tags";
 import { clsx } from "clsx";
 import TaskTags from "./tags";
-import TaskDueDate from "./due-date";
+import TaskDueDateLabel from "@/components/task-due-date/label";
 import { TaskPriority } from "@/types/tasks";
 
 export type TaskEntryContentProps = {
@@ -46,7 +46,7 @@ const TaskEntryContent = ({
                   { "mr-2": !!tags },
                 ])}
               >
-                <TaskDueDate value={dueDate} />
+                <TaskDueDateLabel value={dueDate} />
               </div>
             )}
             {tags && (

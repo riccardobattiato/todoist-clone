@@ -1,22 +1,21 @@
 import CloseBtn from "@/components/atoms/close-btn";
-import TaskDueDate from "@/components/task/due-date";
+import TaskDueDateLabel from "@/components/task-due-date/label";
 import clsx from "clsx";
 
-interface TaskSettingsDueDateProps {
+interface TaskDateBtnProps {
   value?: Date;
-  onChange?: (value: Date) => void;
+  onClick?: () => void;
   onClear?: () => void;
 }
 
-const TaskSettingsDueDate = ({
-  value,
-  onChange,
-  onClear,
-}: TaskSettingsDueDateProps) => {
+const TaskDueDateButton = ({ value, onClick, onClear }: TaskDateBtnProps) => {
   return (
-    <div className="task-settings-due-date group u-task-settings-btn">
+    <div
+      className="task-date-button group u-task-settings-btn"
+      onClick={onClick}
+    >
       <div className="task-settings-due-date__date flex items-center gap-x-1">
-        <TaskDueDate
+        <TaskDueDateLabel
           value={value}
           large
           iconClassName={clsx({ "group-hover:text-white": !value })}
@@ -27,4 +26,4 @@ const TaskSettingsDueDate = ({
   );
 };
 
-export default TaskSettingsDueDate;
+export default TaskDueDateButton;

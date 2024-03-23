@@ -24,6 +24,11 @@ export const getLabelFromDate = (value: Date) => {
   return format(value, "d MMM");
 };
 
+export const getQuickChoiceLabelFromDate = (value: Date) => {
+  if (isToday(value) || isTomorrow(value)) return format(value, "E");
+  return format(value, "E d MMM");
+};
+
 export const getDueDateColor = (date?: Date) => {
   if (!date) return "text-neutral-400";
   const now = new Date();
