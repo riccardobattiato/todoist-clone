@@ -30,7 +30,7 @@ const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
           <div className="task-due-date__input">
             <TaskDueDateInput />
           </div>
-          <div className="task-due-date__menu">
+          <div className="task-due-date__menu py-1 border-y border-neutral-700">
             <TaskDueDateMenu onChange={onChange} onClear={onClear} />
           </div>
           <div className="task-due-date__picker">
