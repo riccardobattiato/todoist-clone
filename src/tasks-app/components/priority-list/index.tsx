@@ -33,7 +33,7 @@ const PriorityList = ({ value, onChange }: PriorityListProps) => {
   return (
     <div className="priority-list">
       <Menu>
-        <Menu.Button ref={refs.setReference}>
+        <Menu.Button as="div" ref={refs.setReference}>
           <PriorityListButton
             value={value}
             onClear={handleClick(TaskPriority.LOW)}

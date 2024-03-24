@@ -19,7 +19,7 @@ const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
   return (
     <div className="task-due-date">
       <Popover>
-        <Popover.Button ref={refs.setReference}>
+        <Popover.Button as="div" ref={refs.setReference}>
           <TaskDateButton value={value} />
         </Popover.Button>
         <Popover.Panel
@@ -27,7 +27,7 @@ const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
           style={floatingStyles}
           className="w-60 border bg-neutral-800 border-neutral-700 rounded-lg overflow-hidden z-[1]"
         >
-          <div className="task-due-date__input">
+          <div className="task-due-date__input py-1">
             <TaskDueDateInput />
           </div>
           <div className="task-due-date__menu py-1 border-y border-neutral-700">
