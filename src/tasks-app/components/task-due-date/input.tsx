@@ -13,7 +13,7 @@ const TaskDueDateInput = ({
   onChange,
   onSubmit,
 }: TaskDueDateInputProps) => {
-  const [text, setText] = useState(value && getLabelForInput(value));
+  const [text, setText] = useState(value ? getLabelForInput(value) : "");
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

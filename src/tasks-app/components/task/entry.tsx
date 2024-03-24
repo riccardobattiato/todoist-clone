@@ -1,8 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import TaskCheckmark from "./checkmark";
 import type { TaskTag } from "./tags";
-import { clsx } from "clsx";
-import { TaskPriority } from "@/types/tasks";
+import { EditTaskFormPayload, TaskPriority } from "@/types/tasks";
 import TaskEntryActions from "./entry-actions";
 import TaskEntryContent from "./entry-content";
 
@@ -16,6 +15,7 @@ export type TaskEntryProps = {
   tags?: TaskTag[];
   onToggleEdit?: () => void;
   onChange?: (id: string, value: boolean) => void;
+  onSubmit?: (payload: EditTaskFormPayload) => void;
   onDelete?: () => void;
 };
 
@@ -28,15 +28,25 @@ const TaskEntry = ({
   tags,
   completed,
   onChange,
+  onSubmit,
   onToggleEdit,
   onDelete,
 }: TaskEntryProps) => {
+  const [payloadDueDate, setPayloadDueDate] = useState(dueDate);
   const handleChange = useCallback(
     (value: boolean) => {
       onChange?.(id, value);
     },
     [id, onChange]
   );
+
+  const handleChangeDueDate = useCallback((value: Date) => {
+    setPayloadDueDate(value);
+  }, []);
+
+  const handleSubmitDueDate = useCallback(() => {
+    onSubmit?.({ id, dueDate: payloadDueDate });
+  }, [id, payloadDueDate, onSubmit]);
 
   return (
     <div className="task-entry group/entry cursor-pointer relative min-h-6 flex items-center">
@@ -52,9 +62,11 @@ const TaskEntry = ({
           <TaskEntryContent
             name={name}
             description={description}
-            dueDate={dueDate}
+            dueDate={payloadDueDate}
             tags={tags}
             completed={completed}
+            onChangeDueDate={handleChangeDueDate}
+            onSubmitDueDate={handleSubmitDueDate}
           />
         </div>
       </div>

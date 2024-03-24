@@ -1,8 +1,7 @@
 import type { TaskTag } from "./tags";
 import { clsx } from "clsx";
 import TaskTags from "./tags";
-import TaskDueDateLabel from "@/components/task-due-date/label";
-import { TaskPriority } from "@/types/tasks";
+import TaskDueDate from "@/components/task-due-date";
 
 export type TaskEntryContentProps = {
   name: string;
@@ -10,7 +9,8 @@ export type TaskEntryContentProps = {
   dueDate?: Date;
   completed?: boolean;
   tags?: TaskTag[];
-  onChange?: (id: string, value: boolean) => void;
+  onChangeDueDate?: (value: Date) => void;
+  onSubmitDueDate?: () => void;
 };
 
 const TaskEntryContent = ({
@@ -19,7 +19,8 @@ const TaskEntryContent = ({
   dueDate,
   tags,
   completed,
-  onChange,
+  onChangeDueDate,
+  onSubmitDueDate,
 }: TaskEntryContentProps) => {
   return (
     <div className="task-entry-content">
@@ -46,7 +47,11 @@ const TaskEntryContent = ({
                   { "mr-2": !!tags },
                 ])}
               >
-                <TaskDueDateLabel value={dueDate} />
+                <TaskDueDate
+                  value={dueDate}
+                  onChange={onChangeDueDate}
+                  onSubmit={onSubmitDueDate}
+                />
               </div>
             )}
             {tags && (

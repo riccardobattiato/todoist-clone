@@ -4,15 +4,25 @@ import TaskDateButton from "./button";
 import TaskDueDateInput from "./input";
 import TaskDueDateMenu from "./menu";
 import TaskDueDatePicker from "./picker";
+import TaskDueDateLabel from "./label";
 
 interface TaskDateProps {
+  type?: "button" | "label";
   value?: Date;
   onChange?: (value: Date) => void;
   onSubmit?: () => void;
   onClear?: () => void;
+  disabled?: boolean;
 }
 
-const TaskDueDate = ({ value, onChange, onSubmit, onClear }: TaskDateProps) => {
+const TaskDueDate = ({
+  type = "label",
+  value,
+  onChange,
+  onSubmit,
+  onClear,
+  disabled,
+}: TaskDateProps) => {
   const { refs, floatingStyles } = useFloating({
     whileElementsMounted: autoUpdate,
     middleware: [flip()],
@@ -20,8 +30,12 @@ const TaskDueDate = ({ value, onChange, onSubmit, onClear }: TaskDateProps) => {
   return (
     <div className="task-due-date">
       <Popover>
-        <Popover.Button as="div" ref={refs.setReference}>
-          <TaskDateButton value={value} />
+        <Popover.Button as="div" ref={refs.setReference} disabled={disabled}>
+          {type === "button" ? (
+            <TaskDateButton value={value} />
+          ) : (
+            <TaskDueDateLabel value={value} />
+          )}
         </Popover.Button>
         <Popover.Panel
           ref={refs.setFloating}

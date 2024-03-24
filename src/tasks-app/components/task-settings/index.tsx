@@ -25,6 +25,7 @@ const TaskSettings = ({
     <div className="task-settings flex items-center gap-x-2">
       <div className="task-settings__due-date">
         <TaskDueDate
+          type="button"
           value={dueDate}
           onChange={onChangeDueDate}
           onSubmit={onSubmitDate}

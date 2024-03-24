@@ -63,6 +63,7 @@ const TaskList = ({
               key={`task-${i}`}
               {...item}
               onChange={handleTaskCheck}
+              onSubmit={handleFormSubmit}
               onToggleEdit={() => toggleEdit?.(item.id)}
               onDelete={() => onDelete?.(item.id)}
             />
