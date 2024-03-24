@@ -8,10 +8,11 @@ import TaskDueDatePicker from "./picker";
 interface TaskDateProps {
   value?: Date;
   onChange?: (value: Date) => void;
+  onSubmit?: () => void;
   onClear?: () => void;
 }
 
-const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
+const TaskDueDate = ({ value, onChange, onSubmit, onClear }: TaskDateProps) => {
   const { refs, floatingStyles } = useFloating({
     whileElementsMounted: autoUpdate,
     middleware: [flip()],
@@ -31,7 +32,7 @@ const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
             <TaskDueDateInput
               value={value}
               onChange={onChange}
-              onClear={onClear}
+              onSubmit={onSubmit}
             />
           </div>
           <div className="task-due-date__menu py-1 border-y border-neutral-700">

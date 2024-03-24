@@ -1,17 +1,17 @@
 import { getLabelForInput } from "@/utils/date";
 import { isValid } from "date-fns";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 interface TaskDueDateInputProps {
   value?: Date;
   onChange?: (value: Date) => void;
-  onClear?: () => void;
+  onSubmit?: () => void;
 }
 
 const TaskDueDateInput = ({
   value,
   onChange,
-  onClear,
+  onSubmit,
 }: TaskDueDateInputProps) => {
   const [text, setText] = useState(value && getLabelForInput(value));
 
@@ -27,6 +27,14 @@ const TaskDueDateInput = ({
     [onChange]
   );
 
+  const handleSubmit = useCallback(
+    (e: FormEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      onSubmit?.();
+    },
+    [onSubmit]
+  );
+
   return (
     <div className="task-due-date-input">
       <input
@@ -34,6 +42,7 @@ const TaskDueDateInput = ({
         placeholder="Type a due date"
         value={text}
         onChange={handleChange}
+        onSubmit={handleSubmit}
         className="task-due-date-input__input w-full px-4 text-sm placeholder:text-zinc-400 leading-8 bg-transparent border-none outline-none"
       />
     </div>
