@@ -10,7 +10,6 @@ interface TaskDateProps {
   type?: "button" | "label";
   value?: Date;
   onChange?: (value: Date) => void;
-  onSubmit?: () => void;
   onClear?: () => void;
   disabled?: boolean;
 }
@@ -19,7 +18,6 @@ const TaskDueDate = ({
   type = "label",
   value,
   onChange,
-  onSubmit,
   onClear,
   disabled,
 }: TaskDateProps) => {
@@ -43,11 +41,7 @@ const TaskDueDate = ({
           className="w-60 border bg-neutral-800 border-neutral-700 rounded-lg overflow-hidden z-[1]"
         >
           <div className="task-due-date__input py-1">
-            <TaskDueDateInput
-              value={value}
-              onChange={onChange}
-              onSubmit={onSubmit}
-            />
+            <TaskDueDateInput value={value} onChange={onChange} />
           </div>
           <div className="task-due-date__menu py-1 border-y border-neutral-700">
             <TaskDueDateMenu

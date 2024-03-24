@@ -41,15 +41,6 @@ const AddTaskForm = ({
     [payload]
   );
 
-  const handlePartialSubmit = useCallback(
-    (key: keyof AddTaskFormPayload) => () => {
-      if (isEditing && initialData?.id)
-        onSubmit?.({ id: initialData.id, [key]: payload[key] });
-      else onSubmit?.({ [key]: payload[key] } as unknown as AddTaskFormPayload);
-    },
-    [isEditing, initialData, payload, onSubmit]
-  );
-
   const handleSubmit = useCallback(() => {
     onSubmit?.({
       id: initialData?.id,
@@ -89,7 +80,6 @@ const AddTaskForm = ({
             priority={payload.priority}
             onChangeDueDate={handleInput("dueDate")}
             onChangePriority={handleInput("priority")}
-            onSubmitDate={handlePartialSubmit("dueDate")}
           />
         </div>
       </div>

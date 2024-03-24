@@ -10,7 +10,6 @@ export type TaskEntryContentProps = {
   completed?: boolean;
   tags?: TaskTag[];
   onChangeDueDate?: (value: Date) => void;
-  onSubmitDueDate?: () => void;
 };
 
 const TaskEntryContent = ({
@@ -20,7 +19,6 @@ const TaskEntryContent = ({
   tags,
   completed,
   onChangeDueDate,
-  onSubmitDueDate,
 }: TaskEntryContentProps) => {
   return (
     <div className="task-entry-content">
@@ -47,11 +45,7 @@ const TaskEntryContent = ({
                   { "mr-2": !!tags },
                 ])}
               >
-                <TaskDueDate
-                  value={dueDate}
-                  onChange={onChangeDueDate}
-                  onSubmit={onSubmitDueDate}
-                />
+                <TaskDueDate value={dueDate} onChange={onChangeDueDate} />
               </div>
             )}
             {tags && (

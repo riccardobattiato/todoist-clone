@@ -5,34 +5,25 @@ import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 interface TaskDueDateInputProps {
   value?: Date;
   onChange?: (value: Date) => void;
-  onSubmit?: () => void;
 }
 
-const TaskDueDateInput = ({
-  value,
-  onChange,
-  onSubmit,
-}: TaskDueDateInputProps) => {
+const TaskDueDateInput = ({ value, onChange }: TaskDueDateInputProps) => {
   const [text, setText] = useState(value ? getLabelForInput(value) : "");
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const {
-        currentTarget: { value },
-      } = e;
-      setText(value);
-      const date = new Date(value);
-      if (isValid(date)) onChange?.(date);
-    },
-    [onChange]
-  );
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setText(value);
+  }, []);
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLInputElement>) => {
       e.preventDefault();
-      onSubmit?.();
+      const date = new Date(text);
+      if (isValid(date)) onChange?.(date);
     },
-    [onSubmit]
+    [text, onChange]
   );
 
   return (

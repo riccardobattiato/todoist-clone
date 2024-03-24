@@ -32,7 +32,6 @@ const TaskEntry = ({
   onToggleEdit,
   onDelete,
 }: TaskEntryProps) => {
-  const [payloadDueDate, setPayloadDueDate] = useState(dueDate);
   const handleChange = useCallback(
     (value: boolean) => {
       onChange?.(id, value);
@@ -40,13 +39,12 @@ const TaskEntry = ({
     [id, onChange]
   );
 
-  const handleChangeDueDate = useCallback((value: Date) => {
-    setPayloadDueDate(value);
-  }, []);
-
-  const handleSubmitDueDate = useCallback(() => {
-    onSubmit?.({ id, dueDate: payloadDueDate });
-  }, [id, payloadDueDate, onSubmit]);
+  const handleChangeDueDate = useCallback(
+    (value: Date) => {
+      onSubmit?.({ id, dueDate: value });
+    },
+    [id, onSubmit]
+  );
 
   return (
     <div className="task-entry group/entry cursor-pointer relative min-h-6 flex items-center">
@@ -62,11 +60,10 @@ const TaskEntry = ({
           <TaskEntryContent
             name={name}
             description={description}
-            dueDate={payloadDueDate}
+            dueDate={dueDate}
             tags={tags}
             completed={completed}
             onChangeDueDate={handleChangeDueDate}
-            onSubmitDueDate={handleSubmitDueDate}
           />
         </div>
       </div>
