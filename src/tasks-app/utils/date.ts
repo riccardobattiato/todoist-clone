@@ -24,6 +24,13 @@ export const getLabelFromDate = (value: Date) => {
   return format(value, "d MMM");
 };
 
+export const getLabelForInput = (value: Date) => {
+  const now = new Date();
+  if (!isSameYear(now, value)) return format(value, "d MMM yyyy");
+
+  return format(value, "d MMM");
+};
+
 export const getQuickChoiceLabelFromDate = (value: Date) => {
   if (isToday(value) || isTomorrow(value)) return format(value, "E");
   return format(value, "E d MMM");

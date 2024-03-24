@@ -28,7 +28,11 @@ const TaskDueDate = ({ value, onChange, onClear }: TaskDateProps) => {
           className="w-60 border bg-neutral-800 border-neutral-700 rounded-lg overflow-hidden z-[1]"
         >
           <div className="task-due-date__input py-1">
-            <TaskDueDateInput />
+            <TaskDueDateInput
+              value={value}
+              onChange={onChange}
+              onClear={onClear}
+            />
           </div>
           <div className="task-due-date__menu py-1 border-y border-neutral-700">
             <TaskDueDateMenu
